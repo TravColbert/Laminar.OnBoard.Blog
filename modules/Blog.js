@@ -14,10 +14,11 @@ module.exports = function(app) {
         .then((result) => {
           let notes = [];
           result.forEach(domain => {
-            app.log("Getting notes for domain: " + domain.name + " (" + domain.notes.length + ")");
+            app.log("Getting notes for domain: " + domain.name + " (" + domain.notes.length + ")",myName,6);
             notes = notes.concat(domain.notes);
           });
           req.appData.notes = notes;
+          req.appData.view = "bloghome";
           resolve(true);
         });
       });

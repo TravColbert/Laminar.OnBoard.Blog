@@ -1,8 +1,8 @@
 
 function convertMarkdownDivs() {
-  let converter = showdown.Converter();
-  let markdownDiv = document.querySelector('.markdown-div');
-  let htmldownDiv = document.querySelector('.htmldown-div');
+  let converter = new showdown.Converter();
+  let markdownDiv = document.querySelector('#markdown-div');
+  let htmldownDiv = document.querySelector('#htmldown-div');
   htmldownDiv.innerHTML = converter.makeHtml(markdownDiv.innerHTML);
 }
 
