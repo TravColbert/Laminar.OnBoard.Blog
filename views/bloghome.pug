@@ -1,5 +1,16 @@
 extends index.pug
 
+mixin create-blog()
+  .item-listing.layout-width-1-1.layout-row
+    .layout-width-1-2
+      a.btn.secondary(href="/notes/")
+        i.material-icons list_alt
+        span Blog Entries
+    .layout-width-1-2
+      a.btn.primary(href="/actions/create/notes/")
+        i.material-icons check_circle_outline
+        span Create Blog Entry
+
 block content
   section.layout-width-sd.layout-col
     .layout-width-1-1.layout-col
@@ -53,9 +64,13 @@ block content
         +list-domains("Domain")
         +create-or-see-domains("Domain")
     if(user)
-      .layout-width-1-1.layout-col
-        h2 Get Started!
-        .layout-col Start writing your own blog entry.
+      h2 Get Started!
+      .layout-width-1-1.layout-row.layout-md-col.layout-wrap
+        .app-features.layout-width-1-2.layout-md-width-1-1.layout-sm-width-1-1.layout-xs-width-1-1
+          .layout-width-1-4.layout-col.text-align-center.layout-justify-center.layout-align-center.textshadow
+            i.material-icons.big-icon folder
+          .layout-width-3-4.text-align-justify Get started writing a blog entry. You can make the blog entry private if you don't want to publish it yet.
+      +create-blog
     if(!user)
       .layout-width-1-1.layout-col
         h2 Get Started!

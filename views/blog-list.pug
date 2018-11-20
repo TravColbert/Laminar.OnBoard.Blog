@@ -1,18 +1,19 @@
-section.layout-width-sd.layout-col
-  .section-hdg.section-hdg-1 Blog Entries (#{notes.length})
-  .layout-row.layout-width-1-1
-    .layout-col.layout-width-1-1.layout-sd-width-5-8.layout-lg-width-5-8.layout-xl-width-4-8
-      ul.itemlist
-        each note in notes
-          - let targetLoc = "/blog/" + note.id + "/";
-          //- li.layout-col.clickable(onclick="goTo('" + targetLoc + "')")
-          li.layout-col
-            .itemdetail.layout-col
-              .label Name:
-              .data #[a(href="/blog/" + note.id + "/") #{note.name}]
-            - let description = note.description || null
-            if description
+if(notes.length>0)
+  section.layout-width-sd.layout-col
+    .section-hdg.section-hdg-1 Blog Entries (#{notes.length})
+    .layout-row.layout-width-1-1
+      .layout-col.layout-width-1-1.layout-sd-width-5-8.layout-lg-width-5-8.layout-xl-width-4-8
+        ul.itemlist
+          each note in notes
+            - let targetLoc = "/blog/" + note.domain.urn + "/articles/" + note.id + "/";
+            //- li.layout-col.clickable(onclick="goTo('" + targetLoc + "')")
+            li.layout-col
               .itemdetail.layout-col
-                .label Description:
-                .data #{note.description}
-      #note_add_button_container.addnote.layout-row.layout-justify-between.authUI(data-fetch="note_add" data-href="/actions/create/notes/")
+                .label Name:
+                .data #[a(href=targetLoc) #{note.name}]
+              - let description = note.description || null
+              if description
+                .itemdetail.layout-col
+                  .label Description:
+                  .data #{note.description}
+        #note_add_button_container.addnote.layout-row.layout-justify-between.authUI(data-fetch="note_add" data-href="/actions/create/notes/")
