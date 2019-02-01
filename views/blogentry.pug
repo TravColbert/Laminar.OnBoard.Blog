@@ -1,32 +1,51 @@
 extends index.pug
 
+block aside
+  aside.sidebar
+    if(user)
+      article#actions
+        .hdg.hdg-1 Actions
+        #note_add_button_container.addnote.authUI(data-fetch="note_add" data-href="/actions/create/notes/")
+        #note_edit_button_container.editnote.authUI(data-fetch="note_edit" data-href="/notes/" + note.id + "/actions/edit/")
+      +list-user-invites()
+      article#articles
+        include blog-list
+      +list-user-domains("Domain")
+      +create-or-see-domains("Domain")
+    if(!user)
+      if(notes && notes.length>0)
+        article#articles
+          include blog-list
+      article#getstarted
+        //- .hdg.hdg-2 Get Started!
+        +login-or-register("Login with your account to begin using your cool app!","Register with your email address to create an account.")
+
 block content
-  section.layout-width-sd.layout-col
-    .section-hdg.section-hdg-1 #{note.name}
-    .list-container.layout-row.layout-width-1-1
-      .item-listing.layout-col.layout-width-1-1.layout-sd-width-5-8.layout-lg-width-5-8.layout-xl-width-5-8
-        .itemdetail.layout-col
+  section.blog
+    article.main
+      .hdg.hdg-1 #{note.name}
+      .item-listing
+        .itemdetail
           .data #{note.description}
-        .itemdetail.subdata.layout-col
+        .itemdetail.subdata
           label.label Author
           .data #{note.user.firstname} #{note.user.lastname}
-        .itemdetail.subdata.layout-col
+        .itemdetail.subdata
           label.label Last Updated
           .data #{note.updatedAt}
-        .itemdetail.layout-col
-          .data#htmldown-div.layout-col
-          .data#markdown-div.hidden #{note.body}
+        .itemdetail
+          .notebody !{note.html}          
         if(user)
-          #note_edit_button_container.editnote.layout-row.layout-justify-between.authUI(data-fetch="note_edit" data-href="/notes/" + note.id + "/actions/edit/")
-      .description.layout-col.layout-xs-hidden.layout-sm-hidden.layout-md-hidden.layout-sd-width-3-8.layout-lg-width-3-8.layout-xl-width-3-8
-        .section-hdg-2 Other Entries
-        .item-listing.layout-col
-          each noteItem in notes
-            if(noteItem.id!=note.id)
-              .infotext.layout-col(onclick="document.location='/blog/" + noteItem.id + "'")
-                .section-hdg.section-hdg-3 #{noteItem.name}
-                .data #{noteItem.user.firstname} #{noteItem.user.lastname}
-                .data #{noteItem.updatedAt}
+          #note_edit_button_container.editnote.authUI(data-fetch="note_edit" data-href="/notes/" + note.id + "/actions/edit/")
+      //- .description
+      //-   .section-hdg-2 Other Entries
+      //-   .item-listing
+      //-     each noteItem in notes
+      //-       if(noteItem.id!=note.id)
+      //-         .infotext(onclick="document.location='/blog/" + noteItem.id + "'")
+      //-           .section-hdg.section-hdg-3 #{noteItem.name}
+      //-           .data #{noteItem.user.firstname} #{noteItem.user.lastname}
+      //-           .data #{noteItem.updatedAt}
 
-block scripts
-  script(src='/js/markdown.js')
+//- block scripts
+//-   script(src='/js/markdown.js')
