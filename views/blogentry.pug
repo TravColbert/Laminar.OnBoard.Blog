@@ -4,13 +4,13 @@ block aside
   aside.sidebar
     if(user)
       article#actions
-        .hdg.hdg-1 Actions
+        .hdg.hdg-2 Actions
         #note_add_button_container.addnote.authUI(data-fetch="note_add" data-href="/actions/create/notes/")
         #note_edit_button_container.editnote.authUI(data-fetch="note_edit" data-href="/notes/" + note.id + "/actions/edit/")
       +list-user-invites()
       article#articles
         include blog-list
-      +list-user-domains("Domain")
+      +list-user-domains("Domains")
       +create-or-see-domains("Domain")
     if(!user)
       if(notes && notes.length>0)
@@ -23,29 +23,22 @@ block aside
 block content
   section.blog
     article.main
-      .hdg.hdg-1 #{note.name}
-      .item-listing
-        .itemdetail
-          .data #{note.description}
-        .itemdetail.subdata
-          label.label Author
-          .data #{note.user.firstname} #{note.user.lastname}
-        .itemdetail.subdata
-          label.label Last Updated
-          .data #{note.updatedAt}
-        .itemdetail
-          .notebody !{note.html}          
-        if(user)
-          #note_edit_button_container.editnote.authUI(data-fetch="note_edit" data-href="/notes/" + note.id + "/actions/edit/")
-      //- .description
-      //-   .section-hdg-2 Other Entries
-      //-   .item-listing
-      //-     each noteItem in notes
-      //-       if(noteItem.id!=note.id)
-      //-         .infotext(onclick="document.location='/blog/" + noteItem.id + "'")
-      //-           .section-hdg.section-hdg-3 #{noteItem.name}
-      //-           .data #{noteItem.user.firstname} #{noteItem.user.lastname}
-      //-           .data #{noteItem.updatedAt}
+      .hdg.hdg-2.articletitle #{note.name}
+      .body
+        .articledescription #{note.description}
+        .articlemetadata
+          .articlemeta.user
+            .label author:
+            .data #{note.user.firstname} #{note.user.lastname}
+          .articlemeta.updated
+            .label updated on:
+            .data #{note.updatedAt.toLocaleDateString()}
+          .articlemeta.domain
+            .label category:
+            - console.log("domain data")
+            - console.log(note)
+            //- .data #{note.domain.name}
+        .articlebody !{note.html}
 
 //- block scripts
 //-   script(src='/js/markdown.js')
