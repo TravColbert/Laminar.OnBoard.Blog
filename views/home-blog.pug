@@ -1,0 +1,72 @@
+extends index.pug
+
+mixin create-blog()
+  .item-listing.layout-width-1-1.layout-row
+    .layout-width-1-2
+      a.btn.secondary(href="/notes/")
+        i.material-icons list_alt
+        span Blog Entries
+    .layout-width-1-2
+      a.btn.primary(href="/actions/create/notes/")
+        i.material-icons check_circle_outline
+        span Create Blog Entry
+
+block aside
+  if(user)
+    aside.sidebar
+      +list-user-invites()
+      +list-user-domains("Domain")
+      +create-or-see-domains("Domain")
+
+block content
+  section.blog
+    article#articlelist
+      - let notesCount = (notes) ? notes.length : 0;
+      .body
+        .hdg.hdg-2 Recent Articles
+        if(notesCount)
+          - let num = notes.length
+          - for(let count=0; count < num; count++) {
+          -   let targetLoc = "/blog/" + notes[count].id + "/";
+          -   if(count==0) {
+                .item.primary
+                  .itemdetail
+                    .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
+                    .articlemetadata
+                      .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
+                    .articlemetadata
+                      .articlemeta.domain
+                        .label filed under: 
+                        .data #{notes[count].domain.name}
+                      .articlemeta.updated 
+                        .label updated on:
+                        .data #{notes[count].updatedAt.toLocaleDateString()}
+                      //- - console.log(notes[count].domain)
+                    .articledescription #{notes[count].description}
+                    - let articleblurb = notes[count].body.slice(0,300).trim() + "... "
+                    .articleblurb #{articleblurb}
+                      a(href="/blog/" + notes[count].id + "/") (read more)
+          -   }
+          -   if(count>0 && count<=2) {
+                .item.secondary
+                  .itemdetail
+                    .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
+                    .articlemetadata
+                      .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
+                      .articlemeta.domain category: #{notes[count].domain.name}
+                    .articledescription #{notes[count].description}
+                    - let articleblurb = notes[count].body.slice(0,150).trim() + "... "
+                    .articleblurb #{articleblurb}
+                      a(href="/blog/" + notes[count].id + "/") (read more)
+          -   }
+          -   if(count>2) {
+                .item
+                  .itemdetail
+                    .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
+                    .articlemetadata
+                      .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
+                      .articlemeta.domain #{notes[count].domain.name}
+                    .articledescription #{notes[count].description}
+          -   }
+          - }
+          //- +list-blogs(notes)
