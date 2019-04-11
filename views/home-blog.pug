@@ -23,15 +23,16 @@ block content
     article#articlelist
       - let notesCount = (notes) ? notes.length : 0;
       .body
-        .hdg.hdg-2 Recent Articles
+        //- .hdg.hdg-2 Recent Articles
         if(notesCount)
           - let num = notes.length
           - for(let count=0; count < num; count++) {
           -   let targetLoc = "/blog/" + notes[count].id + "/";
           -   if(count==0) {
-                .item.primary
+                .item.primary.clickable(onclick="goTo('" + targetLoc + "')")
                   .itemdetail
-                    .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
+                    //- .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
+                    .articletitle #{notes[count].name}
                     .articlemetadata
                       .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
                     .articlemetadata
@@ -45,24 +46,24 @@ block content
                     .articledescription #{notes[count].description}
                     - let articleblurb = notes[count].body.slice(0,300).trim() + "... "
                     .articleblurb #{articleblurb}
-                      a(href="/blog/" + notes[count].id + "/") (read more)
+                      a.read-more(href="/blog/" + notes[count].id + "/") (read more)
           -   }
-          -   if(count>0 && count<=2) {
-                .item.secondary
+          -   if(count>0 && count<=4) {
+                .item.secondary.clickable(onclick="goTo('" + targetLoc + "')")
                   .itemdetail
-                    .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
+                    .articletitle #{notes[count].name}
                     .articlemetadata
                       .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
                       .articlemeta.domain category: #{notes[count].domain.name}
                     .articledescription #{notes[count].description}
                     - let articleblurb = notes[count].body.slice(0,150).trim() + "... "
                     .articleblurb #{articleblurb}
-                      a(href="/blog/" + notes[count].id + "/") (read more)
+                      a.read-more(href="/blog/" + notes[count].id + "/") (read more)
           -   }
-          -   if(count>2) {
-                .item
+          -   if(count>4) {
+                .item.tertiary.clickable(onclick="goTo('" + targetLoc + "')")
                   .itemdetail
-                    .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
+                    .articletitle #{notes[count].name}
                     .articlemetadata
                       .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
                       .articlemeta.domain #{notes[count].domain.name}
