@@ -28,16 +28,14 @@ block content
         .articledescription #{note.description}
         .articlemetadata
           .articlemeta.user
-            .label author:
+            label.label author:
             .data #{note.user.firstname} #{note.user.lastname}
           .articlemeta.updated
-            .label updated on:
+            label.label updated on:
             .data #{note.updatedAt.toLocaleDateString()}
           .articlemeta.domain
-            .label category:
-            //- - console.log("domain data")
-            //- - console.log(note)
-            //- .data #{note.domain.name}
+            label.label category:
+            .data #{note.domain.name}
         .articlebody !{note.html}
 
 //- block scripts
