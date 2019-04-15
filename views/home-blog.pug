@@ -14,9 +14,10 @@ mixin create-blog()
 block aside
   if(user)
     aside.sidebar
-      +list-user-invites()
-      +list-user-domains("Domain")
-      +create-or-see-domains("Domain")
+      .sticky-50.flexy-column
+        +list-user-invites()
+        +list-user-domains("Domain")
+        +create-or-see-domains("Domain")
 
 block content
   section.blog
