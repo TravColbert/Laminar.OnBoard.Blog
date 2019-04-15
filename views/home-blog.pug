@@ -31,7 +31,7 @@ block content
           -   let targetLoc = "/blog/" + notes[count].id + "/";
           -   if(count==0) {
                 .item.primary.clickable(onclick="goTo('" + targetLoc + "')")
-                  .itemdetail
+                  .item-container
                     //- .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
                     .articletitle #{notes[count].name}
                     .articlemetadata
@@ -51,7 +51,7 @@ block content
           -   }
           -   if(count>0 && count<=4) {
                 .item.secondary.clickable(onclick="goTo('" + targetLoc + "')")
-                  .itemdetail
+                  .item-container
                     .articletitle #{notes[count].name}
                     .articlemetadata
                       .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
@@ -63,7 +63,7 @@ block content
           -   }
           -   if(count>4) {
                 .item.tertiary.clickable(onclick="goTo('" + targetLoc + "')")
-                  .itemdetail
+                  .item-container
                     .articletitle #{notes[count].name}
                     .articlemetadata
                       .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
