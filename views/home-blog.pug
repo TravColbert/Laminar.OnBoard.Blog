@@ -43,10 +43,9 @@ block content
                       .articlemeta.updated 
                         .label updated on:
                         .data #{notes[count].updatedAt.toLocaleDateString()}
-                      //- - console.log(notes[count].domain)
                     .articledescription #{notes[count].description}
-                    - let articleblurb = notes[count].html.slice(0,300).trim() + "... "
-                    //- .articleblurb #{articleblurb}
+                    - let imgregex = /<img[^>]*>/gi
+                    - let articleblurb = notes[count].html.slice(0,300).replace(imgregex,'').trim() + "... "
                     .articleblurb !{articleblurb}
                       a.read-more(href="/blog/" + notes[count].id + "/") (read more)
           -   }
