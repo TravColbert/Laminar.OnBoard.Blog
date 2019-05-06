@@ -44,8 +44,11 @@ block content
                         .label updated on:
                         .data #{notes[count].updatedAt.toLocaleDateString()}
                     .articledescription #{notes[count].description}
+                    - let previewCutoff = 300
+                    - let prePosition = notes[count].html.indexOf('<pre>')
+                    - if(prePosition < previewCutoff) previewCutoff = (prePosition-1)
                     - let imgregex = /<img[^>]*>/gi
-                    - let articleblurb = notes[count].html.slice(0,300).replace(imgregex,'').trim() + "... "
+                    - let articleblurb = notes[count].html.slice(0,previewCutoff).replace(imgregex,'').trim() + "... "
                     .articleblurb !{articleblurb}
                       a.read-more(href="/blog/" + notes[count].id + "/") (read more)
           -   }
