@@ -1,5 +1,5 @@
 const express = require('express')
-var router = express.Router()
+var router = express.Router({ strict: true })
 
 module.exports = function (app) {
   // router.get('/', app.tools.homePage)
