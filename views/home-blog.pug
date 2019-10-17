@@ -53,7 +53,7 @@ block content
                     .articleblurb !{articleblurb + "</strong>"}
                       a.read-more(href="/blog/" + notes[count].slug + "/") (read more)
           -   }
-          -   if(count>0 && count<=4) {
+          -   if(count>0 && count<=8) {
                 .item.secondary.clickable(onclick="goTo('" + targetLoc + "')")
                   .item-container
                     .articletitle 
@@ -66,7 +66,7 @@ block content
                     //- .articleblurb #{articleblurb}
                       a.read-more(href="/blog/" + notes[count].id + "/") (read more)
           -   }
-          -   if(count>4) {
+          -   if(count>8) {
                 .item.tertiary.clickable(onclick="goTo('" + targetLoc + "')")
                   .item-container
                     .articletitle 
