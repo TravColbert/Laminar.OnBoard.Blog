@@ -51,7 +51,7 @@ block content
                     - let imgregex = /<img[^>]*>/gi
                     - let articleblurb = notes[count].html.slice(0,previewCutoff).replace(imgregex,'').trim() + "... "
                     .articleblurb !{articleblurb + "</strong>"}
-                      a.read-more(href="/blog/" + notes[count].id + "/") (read more)
+                      a.read-more(href="/blog/" + notes[count].slug + "/") (read more)
           -   }
           -   if(count>0 && count<=4) {
                 .item.secondary.clickable(onclick="goTo('" + targetLoc + "')")
