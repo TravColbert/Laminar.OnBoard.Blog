@@ -28,7 +28,7 @@ block content
         if(notesCount)
           - let num = notes.length
           - for(let count=0; count < num; count++) {
-          -   let targetLoc = "/blog/" + notes[count].id + "/";
+          -   let targetLoc = "/blog/" + notes[count].slug + "/";
           -   if(count==0) {
                 .item.primary.clickable(onclick="goTo('" + targetLoc + "')")
                   .item-container
