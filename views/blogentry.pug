@@ -23,7 +23,9 @@ block aside
 block content
   section.blog
     article.main
-      h1.articletitle #{note.name}
+      h1.articletitle 
+        a(href="/blog/") <&nbsp;
+        | #{note.name}
       .body
         .articledescription #{note.description}
         .articlemetadata
@@ -37,3 +39,6 @@ block content
             label.label category:
             .data #{note.domain.name}
         .articlebody !{note.html}
+        a(href="/blog/").btn
+         i.material-icons arrow_back_ios
+         | back to blog
