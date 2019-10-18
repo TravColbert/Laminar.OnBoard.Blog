@@ -25,7 +25,6 @@ block content
       h1 Articles
       - let notesCount = (notes) ? notes.length : 0;
       .body
-        //- .hdg.hdg-2 Recent Articles
         if(notesCount)
           - let num = notes.length
           - for(let count=0; count < num; count++) {
