@@ -29,52 +29,69 @@ block content
           - let num = notes.length
           - for(let count=0; count < num; count++) {
           -   let targetLoc = "/blog/" + notes[count].slug + "/";
+          -   // try checking for the first image to display as a thumbnail
+          -   let imgregex = /src="(https?:\/\/[^"\/]+)\/files\/([^"]+)"/
+          -   let matches = notes[count].html.match(imgregex)
+          -   let articleThumbnail = (matches) ? matches : []
           -   if(count==0) {
                 .item.primary.clickable(onclick="goTo('" + targetLoc + "')")
                   .item-container
-                    //- .articletitle #[a(href="/blog/" + notes[count].id + "/") #{notes[count].name}]
                     .articletitle
                       a(href=targetLoc) #{notes[count].name}
-                    .articlemetadata
-                      .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
-                    .articlemetadata
-                      .articlemeta.domain
-                        .label filed under: 
-                        .data #{notes[count].domain.name}
-                      .articlemeta.updated 
-                        .label updated on:
-                        .data #{notes[count].updatedAt.toLocaleDateString()}
-                    .articledescription #{notes[count].description}
-                    - let previewCutoff = 300
-                    - let prePosition = notes[count].html.indexOf('<pre>')
-                    - if(prePosition >= 0 && prePosition < previewCutoff) previewCutoff = (prePosition-1)
-                    - let imgregex = /<img[^>]*>/gi
-                    - let articleblurb = notes[count].html.slice(0,previewCutoff).replace(imgregex,'').trim() + "... "
-                    .articleblurb !{articleblurb + "</strong>"}
-                      a.read-more(href="/blog/" + notes[count].slug + "/") (read more)
+                    .flexy-row
+                      - if(articleThumbnail.length > 0)
+                        .articlethumbnail
+                          img(src=articleThumbnail[1] + "/thumbs/" + articleThumbnail[2]).thumbnail
+                      .flexy-column
+                        .articlemetadata
+                          .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
+                        .articlemetadata
+                          .articlemeta.domain
+                            .label category: 
+                            .data #{notes[count].domain.name}
+                          .articlemeta.updated 
+                            .label updated on:
+                            .data #{notes[count].updatedAt.toLocaleDateString()}
+                        .articledescription #{notes[count].description}
+                        - let previewCutoff = 300
+                        - let prePosition = notes[count].html.indexOf('<pre>')
+                        - if(prePosition >= 0 && prePosition < previewCutoff) previewCutoff = (prePosition-1)
+                        - let imgregex = /<img[^>]*>/gi
+                        - let articleblurb = notes[count].html.slice(0,previewCutoff).replace(imgregex,'').trim() + "... "
+                        .articleblurb !{articleblurb + "</strong>"}
+                          a.read-more(href="/blog/" + notes[count].slug + "/") &nbsp;(read more)
           -   }
           -   if(count>0 && count<=8) {
                 .item.secondary.clickable(onclick="goTo('" + targetLoc + "')")
                   .item-container
                     .articletitle 
                       a(href=targetLoc) #{notes[count].name}
-                    .articlemetadata
-                      .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
-                      .articlemeta.domain category: #{notes[count].domain.name}
-                    .articledescription #{notes[count].description}
-                    //- - let articleblurb = notes[count].body.slice(0,150).trim() + "... "
-                    //- .articleblurb #{articleblurb}
-                      a.read-more(href="/blog/" + notes[count].id + "/") (read more)
+                    .flexy-row
+                      - if(articleThumbnail.length > 0)
+                        .articlethumbnail
+                          img(src=articleThumbnail[1] + "/thumbs/" + articleThumbnail[2]).thumbnail
+                      .flexy-column
+                        .articlemetadata
+                          .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
+                          .articlemeta.domain category: #{notes[count].domain.name}
+                        .articledescription #{notes[count].description}
+                          a.read-more(href="/blog/" + notes[count].id + "/") &nbsp;(read more)
           -   }
           -   if(count>8) {
                 .item.tertiary.clickable(onclick="goTo('" + targetLoc + "')")
                   .item-container
                     .articletitle 
                       a(href=targetLoc) #{notes[count].name}
-                    .articlemetadata
-                      .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
-                      .articlemeta.domain #{notes[count].domain.name}
-                    .articledescription #{notes[count].description}
+                    .flexy-row
+                      - if(articleThumbnail.length > 0)
+                        .articlethumbnail
+                          img(src=articleThumbnail[1] + "/thumbs/" + articleThumbnail[2]).thumbnail
+                      .flexy-column
+                        .articlemetadata
+                          .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
+                          .articlemeta.domain #{notes[count].domain.name}
+                        .articledescription #{notes[count].description}
+                          a.read-more(href="/blog/" + notes[count].id + "/") &nbsp;(read more)
           -   }
           - }
           //- +list-blogs(notes)
