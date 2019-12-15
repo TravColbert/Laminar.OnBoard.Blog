@@ -75,7 +75,7 @@ block content
                           .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
                           .articlemeta.domain category: #{notes[count].domain.name}
                         .articledescription #{notes[count].description}
-                          a.read-more(href="/blog/" + notes[count].id + "/") &nbsp;(read more)
+                          a.read-more(href="/blog/" + notes[count].slug + "/") &nbsp;(read more)
           -   }
           -   if(count>8) {
                 .item.tertiary.clickable(onclick="goTo('" + targetLoc + "')")
@@ -91,7 +91,7 @@ block content
                           .articlemeta.user #{notes[count].user.firstname} #{notes[count].user.lastname}
                           .articlemeta.domain #{notes[count].domain.name}
                         .articledescription #{notes[count].description}
-                          a.read-more(href="/blog/" + notes[count].id + "/") &nbsp;(read more)
+                          a.read-more(href="/blog/" + notes[count].slug + "/") &nbsp;(read more)
           -   }
           - }
           //- +list-blogs(notes)
