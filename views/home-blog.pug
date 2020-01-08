@@ -56,7 +56,7 @@ block content
                         - let previewCutoff = 300
                         - let prePosition = notes[count].html.indexOf('<pre>')
                         - if(prePosition >= 0 && prePosition < previewCutoff) previewCutoff = (prePosition-1)
-                        - let imgregex = /<img[^>]*>/gi
+                        - let imgregex = /<img[^>]*>?/gi
                         - let articleblurb = notes[count].html.slice(0,previewCutoff).replace(imgregex,'').trim() + "... "
                         .articleblurb !{articleblurb + "</strong>"}
                           a.read-more(href="/blog/" + notes[count].slug + "/") &nbsp;(read more)
